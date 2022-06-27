@@ -1,2 +1,2 @@
-asm.o
+*.o
 phenom2_benchmark
