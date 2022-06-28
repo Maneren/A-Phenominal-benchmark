@@ -7,16 +7,13 @@ section .text
 
 ; Checks CPUID for AVX capability
 GetAVXCapability:
-        push rbx
-        
         mov eax, 1
         cpuid
 
         mov eax, ecx
         shr eax, 28             ; Read bit 28
         and eax, 1
-
-        pop rbx
+        
         ret
 
 

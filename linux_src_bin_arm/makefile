@@ -1,5 +1,18 @@
-phenom2_benchmark: main.cpp asm.o
-	g++ main.cpp asm.o -lpthread -ffast-math -Ofast -o phenom2_benchmark -Ofast -march=native
+CXX = g++
+CXXFLAGS = -Wall -Wextra
+OFLAGS = -march=native -mtune=native -Ofast -ffast-math
+LDFLAGS = -lpthread
 
-asm.o: asm.asm AND_REG_REG.asm CMOVcc_REG_REG.asm PADDB_MMX.asm ADD_REG_1.asm SHR_REG_CL.asm AVXChecker.asm FLOPS.asm IMUL_REG_REG.asm
-	nasm asm.asm -felf64 -o asm.o
+BIN = phenom2_benchmark_arm
+
+.PHONY: clean
+
+$(BIN): main.cpp asm.o
+	$(CXX) $(CXXFLAGS) $(OFLAGS) $^ -o $@ $(LDFLAGS)
+
+asm.o: asm.s AND_REG_REG.s CMOVcc_REG_REG.s PADDB_MMX.s ADD_REG_1.s SHR_REG_CL.s AVXChecker.s FLOPS.s IMUL_REG_REG.s
+	as -c asm.s -o asm.o
+
+clean:
+	@rm -rf *.o $(BIN)
+

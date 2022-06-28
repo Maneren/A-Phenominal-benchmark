@@ -1,17 +1,17 @@
-global SHR_REG_CL
-global SHR_REG_CL_AVX_512
+.global SHR_REG_CL
+.global SHR_REG_CL_AVX_512
 
-section .text
+.section .text
 
 %macro SHR_MACRO 0
-	shr rax, cl
-	shr rdx, cl
-	shr rdi, cl
-	shr rsi, cl
-	shr r11, cl
-	shr r8, cl
-	shr r9, cl
-	shr r10, cl
+	asr rax, 1
+	asr rdx, 1
+	asr rdi, 1
+	asr rsi, 1
+	asr r11, 1
+	asr r8, 1
+	asr r9, 1
+	asr r10,1
 %endmacro
 
 
@@ -84,12 +84,12 @@ SHR_REG_CL_AVX_512:
 											;but we only have to do it once, and I can't
 											;be bothered to pour through the instrinsics
 											;manual for a single instruction that saves 3
-											;total cycles.  
+											;total cycles.
 
 
     vxorps zmm1, zmm1, zmm1					; zero out the AVX 512 registers
 
-	vxorps ymm1, ymm1, ymm1	
+	vxorps ymm1, ymm1, ymm1
 
 	vxorps xmm1, xmm1, xmm1
 	vxorps xmm2, xmm2, xmm2

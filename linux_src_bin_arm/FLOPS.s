@@ -6,73 +6,69 @@ section .text
 
 ; 8x phenom II
 %macro ADD_SSE 0
-	addps xmm1, xmm0
-	addps xmm2, xmm0
-	addps xmm3, xmm0
-	addps xmm4, xmm0
-	addps xmm5, xmm0
-	addps xmm6, xmm0
-	addps xmm7, xmm0
-	addps xmm8, xmm0
+	addps xmm0, xmm1
+	addps xmm0, xmm2
+	addps xmm0, xmm3
+	addps xmm0, xmm4
+	addps xmm0, xmm5
+	addps xmm0, xmm6
+	addps xmm0, xmm7
+	addps xmm0, xmm8
 %endmacro
 
 ; For AVX capable CPU's
 %macro ADD_AVX 0
-	vaddps ymm1, ymm1, ymm0
-	vaddps ymm2, ymm2, ymm0
-	vaddps ymm3, ymm3, ymm0
-	vaddps ymm4, ymm4, ymm0
-	vaddps ymm5, ymm5, ymm0
-	vaddps ymm6, ymm6, ymm0
-	vaddps ymm7, ymm7, ymm0
-	vaddps ymm8, ymm8, ymm0
-	vaddps ymm9, ymm9, ymm0
-	vaddps ymm10, ymm10, ymm0
-	vaddps ymm11, ymm11, ymm0
-	vaddps ymm12, ymm12, ymm0
-	vaddps ymm13, ymm13, ymm0
-	vaddps ymm14, ymm14, ymm0
-	vaddps ymm15, ymm15, ymm0
-
-
-		
+	vaddps ymm0, ymm1, ymm1
+	vaddps ymm0, ymm2, ymm2
+	vaddps ymm0, ymm3, ymm3
+	vaddps ymm0, ymm4, ymm4
+	vaddps ymm0, ymm5, ymm5
+	vaddps ymm0, ymm6, ymm6
+	vaddps ymm0, ymm7, ymm7
+	vaddps ymm0, ymm8, ymm8
+	vaddps ymm0, ymm9, ymm9
+	vaddps ymm0, ymm10, ymm10
+	vaddps ymm0, ymm11, ymm11
+	vaddps ymm0, ymm12, ymm12
+	vaddps ymm0, ymm13, ymm13
+	vaddps ymm0, ymm14, ymm14
+	vaddps ymm0, ymm15, ymm15
 %endmacro;
 
 
 ; For AVX512 capable CPU's
 %macro ADD_AVX512 0
-	vaddps zmm1, zmm1, zmm0
-	vaddps zmm2, zmm2, zmm0
-	vaddps zmm3, zmm3, zmm0
-	vaddps zmm4, zmm4, zmm0
-	vaddps zmm5, zmm5, zmm0
-	vaddps zmm6, zmm6, zmm0
-	vaddps zmm7, zmm7, zmm0
-	vaddps zmm8, zmm8, zmm0
-	vaddps zmm9, zmm9, zmm0
-	vaddps zmm10, zmm10, zmm0
-	vaddps zmm11, zmm11, zmm0
-	vaddps zmm12, zmm12, zmm0
-	vaddps zmm13, zmm13, zmm0
-	vaddps zmm14, zmm14, zmm0
-	vaddps zmm15, zmm15, zmm0
-	vaddps zmm16, zmm16, zmm0
-	vaddps zmm17, zmm17, zmm0
-	vaddps zmm18, zmm18, zmm0
-	vaddps zmm19, zmm19, zmm0
-	vaddps zmm20, zmm20, zmm0
-	vaddps zmm21, zmm21, zmm0
-	vaddps zmm22, zmm22, zmm0
-	vaddps zmm23, zmm23, zmm0
-	vaddps zmm24, zmm24, zmm0
-	vaddps zmm25, zmm25, zmm0
-	vaddps zmm26, zmm26, zmm0
-	vaddps zmm27, zmm27, zmm0
-	vaddps zmm28, zmm28, zmm0
-	vaddps zmm29, zmm29, zmm0
-	vaddps zmm30, zmm30, zmm0
-	vaddps zmm31, zmm31, zmm0
-
+	vaddps zmm0, zmm1, zmm1
+	vaddps zmm0, zmm2, zmm2
+	vaddps zmm0, zmm3, zmm3
+	vaddps zmm0, zmm4, zmm4
+	vaddps zmm0, zmm5, zmm5
+	vaddps zmm0, zmm6, zmm6
+	vaddps zmm0, zmm7, zmm7
+	vaddps zmm0, zmm8, zmm8
+	vaddps zmm0, zmm9, zmm9
+	vaddps zmm0, zmm10, zmm10
+	vaddps zmm0, zmm11, zmm11
+	vaddps zmm0, zmm12, zmm12
+	vaddps zmm0, zmm13, zmm13
+	vaddps zmm0, zmm14, zmm14
+	vaddps zmm0, zmm15, zmm15
+	vaddps zmm0, zmm16, zmm16
+	vaddps zmm0, zmm17, zmm17
+	vaddps zmm0, zmm18, zmm18
+	vaddps zmm0, zmm19, zmm19
+	vaddps zmm0, zmm20, zmm20
+	vaddps zmm0, zmm21, zmm21
+	vaddps zmm0, zmm22, zmm22
+	vaddps zmm0, zmm23, zmm23
+	vaddps zmm0, zmm24, zmm24
+	vaddps zmm0, zmm25, zmm25
+	vaddps zmm0, zmm26, zmm26
+	vaddps zmm0, zmm27, zmm27
+	vaddps zmm0, zmm28, zmm28
+	vaddps zmm0, zmm29, zmm29
+	vaddps zmm0, zmm30, zmm30
+	vaddps zmm0, zmm31, zmm31
 %endmacro
 
 FLOPS_SSE:
