@@ -7,21 +7,21 @@
 
 // Checker function for AVX and SSE
 // extern "C" bool GetVMXCapability();
-// extern "C" bool GetAVX512Capability();
-// extern "C" bool GetAVXCapability();
-// extern "C" bool GetSSECapability();
+extern "C" bool GetAVX512Capability();
+extern "C" bool GetAVXCapability();
+extern "C" bool GetSSECapability();
 
 // Job functions  (Note: ThreadID is included for future versions)
 // Each executes 1024^3 times, 1 gig, or around 1 billion operations.
 extern "C" void ADD_REG_1(int threadID);
 extern "C" void AND_REG_REG(int threadID);
-// extern "C" void SHR_REG_CL(int threadID);
-// extern "C" void SHR_REG_CL_AVX_512(int threadID);
+extern "C" void SHR_REG_CL(int threadID);
+extern "C" void SHR_REG_CL_AVX_512(int threadID);
 // extern "C" void PADDB_MMX(int threadID);
 // extern "C" void CMOVcc_REG_REG(int threadID);
-// extern "C" void FLOPS_SSE(int threadID);
-// extern "C" void FLOPS_AVX(int threadID);
-// extern "C" void FLOPS_AVX512(int threadID);
+extern "C" void FLOPS_SSE(int threadID);
+extern "C" void FLOPS_AVX(int threadID);
+extern "C" void FLOPS_AVX512(int threadID);
 
 // MUL added for Reirei
 // extern "C" void IMUL_REG_REG(int threadID);
@@ -113,9 +113,9 @@ int main()
 
     // Check for CPU capabilities
     // bool VMX_CAPABLE = GetVMXCapability();
-    // bool AVX512_CAPABLE = GetAVX512Capability();
-    // bool AVX_CAPABLE = GetAVXCapability();
-    // bool SSE_CAPABLE = GetSSECapability();
+    bool AVX512_CAPABLE = GetAVX512Capability();
+    bool AVX_CAPABLE = GetAVXCapability();
+    bool SSE_CAPABLE = GetSSECapability();
 
     // Limit output digits to 4
     std::cout.precision(4);
@@ -139,7 +139,7 @@ int main()
     std::cout << std::endl;
 
     /* if (VMX_CAPABLE)
-        std::cout << "VMX CPU detected!" << std::endl;
+        std::cout << "VMX CPU detected!" << std::endl; */
     if (AVX512_CAPABLE)
         std::cout << "AVX512 CPU detected!  We'll use it for FLOPS and SHR" << std::endl;
     else
@@ -151,7 +151,7 @@ int main()
     if (SSE_CAPABLE)
         std::cout << "SSE CPU detected!" << std::endl;
     else
-        std::cout << "SSE capable CPU is required FLOPS test." << std::endl; */
+        std::cout << "SSE capable CPU is required FLOPS test." << std::endl;
 
     std::cout << "Threads available: " << threadCount << " vs. 4 for Phenom II" << std::endl;
 
@@ -186,29 +186,29 @@ int main()
             case 2:
                 currentFunction = AND_REG_REG;
                 break;
-                /* case 3:
-                     currentFunction = (AVX512_CAPABLE ? SHR_REG_CL_AVX_512 : SHR_REG_CL);
-                     break;
-                       case 4:
-                          currentFunction = PADDB_MMX;
-                          break;
-                     case 5:
-                          currentFunction = CMOVcc_REG_REG;
-                          break;
-                            case 6:
-                               currentFunction = FLOPS_SSE;
-                               break;
-                           case 7:
-                               currentFunction = FLOPS_AVX;
-                               break;
-                           case 8:
-                               currentFunction =
-                                       (AVX512_CAPABLE ? FLOPS_AVX512 : (AVX_CAPABLE ? FLOPS_AVX :
-                           FLOPS_SSE)); break;
+            case 3:
+                currentFunction = (AVX512_CAPABLE ? SHR_REG_CL_AVX_512 : SHR_REG_CL);
+                break;
+                /*    case 4:
+                      currentFunction = PADDB_MMX;
+                      break;
+                 case 5:
+                      currentFunction = CMOVcc_REG_REG;
+                      break;*/
+            case 6:
+                currentFunction = FLOPS_SSE;
+                break;
+            case 7:
+                currentFunction = FLOPS_AVX;
+                break;
+            case 8:
+                currentFunction =
+                    (AVX512_CAPABLE ? FLOPS_AVX512 : (AVX_CAPABLE ? FLOPS_AVX : FLOPS_SSE));
+                break;
 
-                                           // Select SSE, AVX or AVX512
-                                           case 9: currentFunction =
-                           IMUL_REG_REG; break; */
+                /*  // Select SSE, AVX or AVX512
+                  case 9: currentFunction =
+  IMUL_REG_REG; break; */
             case 10:
                 threadCount = (1 * (threadCount != 1)) +
                               (std::thread::hardware_concurrency() * (threadCount == 1));

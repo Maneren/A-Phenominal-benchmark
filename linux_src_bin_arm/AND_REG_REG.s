@@ -3,30 +3,29 @@
 .section .text
 
 .macro AND_MACRO
-	and w1, w1, w12
-	and w2, w2, w12
-	and w3, w3, w12
-	and w4, w4, w12
-	and w5, w5, w12
-	and w6, w6, w12
-	and w7, w7, w12
-	and w8, w8, w12
+	and x1, x1, x12
+	and x2, x2, x12
+	and x3, x3, x12
+	and x4, x4, x12
+	and x5, x5, x12
+	and x6, x6, x12
+	and x7, x7, x12
+	and x8, x8, x12
 .endm
 
 AND_REG_REG:
-	mov w0, 0
-	mov w1, 0
-	mov w2, 0
-	mov w3, 0
-	mov w4, 0
-	mov w5, 0
-	mov w6, 0
-	mov w7, 0
-	mov w8, 0
+	mov x1, 0
+	mov x2, 0
+	mov x3, 0
+	mov x4, 0
+	mov x5, 0
+	mov x6, 0
+	mov x7, 0
+	mov x8, 0
 
-	mov w12, 0
+	mov x12, 0
 
-	mov w0, 8388608
+	mov x0, 8388608
 
 .AndLoop:
 	AND_MACRO
@@ -46,8 +45,8 @@ AND_REG_REG:
 	AND_MACRO
 	AND_MACRO
 
-	sub w0, w0, 1
-	cmp w0, 0
+	sub x0, x0, 1
+	cmp x0, 0
 
 	bne .AndLoop
 	ret

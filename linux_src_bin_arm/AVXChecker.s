@@ -1,52 +1,36 @@
-global GetAVX512Capability
-global GetAVXCapability
-global GetSSECapability
+.global GetAVX512Capability
+.global GetAVXCapability
+.global GetSSECapability
 
-section .text
+.section .text
 
 
-; Checks CPUID for AVX capability
 GetAVXCapability:
-        mov eax, 1
-        cpuid
+        mov x0, 1
 
-        mov eax, ecx
-        shr eax, 28             ; Read bit 28
-        and eax, 1
-        
+        mrs x0, id_aa64pfr0_el1
+
+        mov x1, x0
+        asr x1, x1, 20
+        and x1, x1, 1
+
         ret
 
 
-; Checks CPUID for SSE capability
 GetSSECapability:
-        push rbx
+        mov x0, 1
 
-        mov eax, 1
-        cpuid
+        mrs x0, id_aa64pfr0_el1
 
-        mov eax, edx
-        shr eax, 25             ; Read bit 25
-        and eax, 1
+        mov x1, x0
+        asr x1, x1, 32
+        and x1, x1, 1
 
-        pop rbx
         ret
 
-; Checks CPUID for AVX512 capability
 GetAVX512Capability:
-        push rbx
+        mov x0, 0
 
-        mov eax, 7
-	xor ecx, ecx
-        cpuid
+        and x0, x0, 1
 
-        mov eax, ebx
-        shr eax, 16             ; Read bit 16
-        and eax, 1
-
-        pop rbx
         ret
-
-
-
-
-
