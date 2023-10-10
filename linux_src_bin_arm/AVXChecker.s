@@ -11,7 +11,7 @@ GetAVXCapability:
         mrs x0, id_aa64pfr0_el1
 
         mov x1, x0
-        asr x1, x1, 20
+        asr x1, x1, 32
         and x1, x1, 1
 
         ret
@@ -23,8 +23,8 @@ GetSSECapability:
         mrs x0, id_aa64pfr0_el1
 
         mov x1, x0
-        asr x1, x1, 32
-        and x1, x1, 1
+        asr x1, x1, 20
+        and x1, x1, 0
 
         ret
 
